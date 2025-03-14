@@ -1,1 +1,7 @@
+<<<<<<< HEAD
 .env
+||||||| parent of 61cf5f5 (Ignore large model files)
+=======
+.env
+Sentence_pair_classfication/bert_nli_model/
+>>>>>>> 61cf5f5 (Ignore large model files)
