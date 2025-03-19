@@ -7,7 +7,7 @@ Model Structure : BERT Encoder Represetations from Transformers
 <br>
 ### Datasets
 
-Klue/nli bt Hugging Face datasets
+Klue/nli by Hugging Face datasets
 <br>
 NLI : Natural Language Inference
 
