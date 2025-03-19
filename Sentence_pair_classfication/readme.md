@@ -1,5 +1,6 @@
 ## Sentence pair classfication
 <hr>
+
 ### Use KC-BERT Base (beomi/kcbert-base) by Hugging Face
 
 Model Structure : BERT Encoder Represetations from Transformers
@@ -25,6 +26,8 @@ Use BertTokenizer(Max_length=64)
 <br>
 ### USE Flask & Ngrok
 <hr>
+
 ### Result
+
 <img src="res1.png">
 <img src="res2.png">
