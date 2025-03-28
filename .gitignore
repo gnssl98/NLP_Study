@@ -1,0 +1,4 @@
+.DS_Store
+checkpoint-*
+Sentence_pair_classfication/bert_nli_model/
+.env

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문장 관계 분류</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; text-align: center; }
+        input, button { margin: 10px; padding: 8px; width: 80%; max-width: 500px; }
+        button { cursor: pointer; }
+        #result { margin-top: 20px; font-size: 18px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h2>문장 관계 분류</h2>
+    <p>Premise와 Hypothesis를 입력하고 예측하기 버튼을 누르세요.</p>
+
+    <!-- 문장 관계 예측을 위한 입력 필드 -->
+    <input type="text" id="premise" placeholder="Premise (예: 나는 사과를 좋아해)">
+    <br>
+    <input type="text" id="hypothesis" placeholder="Hypothesis (예: 나는 과일을 좋아해)">
+    <br>
+    <button onclick="sendRequest()">예측하기</button>
+
+    <!-- 결과 표시 영역 -->
+    <div id="result"></div>
+
+    <!-- JavaScript 코드 (Flask 서버와 연결) -->
+    <script>
+        function sendRequest() {
+            const premise = document.getElementById("premise").value;
+            const hypothesis = document.getElementById("hypothesis").value;
+
+            if (!premise || !hypothesis) {
+                alert("Premise와 Hypothesis를 입력하세요!");
+                return;
+            }
+
+            fetch("http://localhost:5001/predict", {  // Flask 서버 URL (localhost:5001)
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ premise: premise, hypothesis: hypothesis })  // JSON 데이터 전송
+            })
+            .then(response => response.json())  // JSON 응답 처리
+            .then(data => {
+                document.getElementById("result").innerHTML = `
+                    <p>예측 결과: <strong>${data.prediction}</strong></p>
+                    <p>참 확률: ${data.entailment_data}</p>
+                    <p>거짓 확률: ${data.contradiction_data}</p>
+                    <p>중립 확률: ${data.neutral_data}</p>
+                `;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                document.getElementById("result").innerHTML = "<p style='color: red;'>예측 요청 실패! Flask 서버가 실행 중인지 확인하세요.</p>";
+            });
+        }
+    </script>
+
+</body>
+</html>
